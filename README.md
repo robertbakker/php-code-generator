@@ -1,6 +1,7 @@
 # PHP Code generator for PHP 8+
 
 Generate often used code by answering simple questions on the command line.
+The goal is to have an intelligent code generator which understands your project.
 
 This is very early work, do not use.
 
