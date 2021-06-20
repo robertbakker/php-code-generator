@@ -24,6 +24,7 @@ if (empty($composer)) {
 }
 
 use RobertBakker\PhpCodeGenerator\CodeWriter;
+use RobertBakker\PhpCodeGenerator\Command\RepositoryCommand;
 use RobertBakker\PhpCodeGenerator\Command\ServiceCommand;
 use RobertBakker\PhpCodeGenerator\Detector\NamespaceDetector;
 use Symfony\Component\Console\Application;
@@ -38,5 +39,6 @@ $application->setName("PHP Code Generator");
 
 $codeWriter = new CodeWriter($composer);
 $application->add(new ServiceCommand($codeWriter, $defaultNamespace));
+$application->add(new RepositoryCommand($codeWriter, $defaultNamespace));
 
 $application->run();

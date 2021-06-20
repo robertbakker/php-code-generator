@@ -8,6 +8,7 @@ use Nette\PhpGenerator\PhpNamespace;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use RobertBakker\PhpCodeGenerator\Attribute\Generated;
 
 class ServiceGenerator
 {
@@ -19,6 +20,9 @@ class ServiceGenerator
         $constructor = $class->addMethod('__construct');
 
         $class->setFinal();
+
+        $namespace->addUse(Generated::class);
+        $class->addAttribute(Generated::class);
 
         // Implement the LoggerAwareInterface
         $namespace->addUse(NullLogger::class);
@@ -34,7 +38,6 @@ class ServiceGenerator
         $setLoggerMethod
             ->addParameter("logger")
             ->setType(LoggerInterface::class);
-
 
         return $namespace;
     }

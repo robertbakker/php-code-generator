@@ -7,6 +7,7 @@ namespace RobertBakker\PhpCodeGenerator;
 use Composer\Autoload\ClassLoader;
 use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\Printer;
+use RobertBakker\PhpCodeGenerator\Attribute\Generated;
 
 class CodeWriter
 {
@@ -44,6 +45,14 @@ class CodeWriter
 
         $className = $classes[0];
         $fullyQualifiedClassName = trim($namespace->getName() . "\\" . $className, "\\");
+
+        if (interface_exists($fullyQualifiedClassName) || class_exists($fullyQualifiedClassName)) {
+            $reflectionClass = new \ReflectionClass($fullyQualifiedClassName);
+            $attributes = $reflectionClass->getAttributes(Generated::class);
+            if (count($attributes) === 0) {
+                throw new \Exception(sprintf("There is already an existing class/interface '%s' without a #[Generated] attribute, stopping...", $fullyQualifiedClassName));
+            }
+        }
 
         $leftOverClassName = $className;
         if (substr($fullyQualifiedClassName, 0, strlen($outputNamespace)) == $outputNamespace) {

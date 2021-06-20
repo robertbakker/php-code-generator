@@ -35,5 +35,6 @@ Available commands:
   help         Display help for a command
   list         List commands
  ddd
-  ddd:service  Generate a service class for a Domain Driven Design (DDD) style project
+  ddd:repository  Generate a repository interface for a Domain Driven Design (DDD) style project
+  ddd:service     Generate a service class for a Domain Driven Design (DDD) style project
 ```
