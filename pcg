@@ -25,11 +25,13 @@ if (empty($composer)) {
 
 use RobertBakker\PhpCodeGenerator\CodeWriter;
 use RobertBakker\PhpCodeGenerator\Command\ServiceCommand;
+use RobertBakker\PhpCodeGenerator\Detector\NamespaceDetector;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Dotenv\Dotenv;
 
 (new Dotenv())->bootEnv(__DIR__ . '/.env');
-$defaultNamespace = $_ENV["CODE_GENERATOR_NAMESPACE"];
+$defaultNamespace = (new NamespaceDetector($composer))->detect();
+fwrite(STDOUT, sprintf("Using namespace '%s' as default", $defaultNamespace) . PHP_EOL . PHP_EOL);
 
 $application = new Application();
 $application->setName("PHP Code Generator");
