@@ -1,12 +1,25 @@
 #!/usr/bin/env php
 <?php
 
-if (version_compare('8.0.0', PHP_VERSION, '>')) {
-    echo "Code Generator requires PHP 8 or higher";
+if (version_compare("8.0.0", PHP_VERSION, ">")) {
+    fwrite(STDERR, "Code Generator requires PHP 8 or higher" . PHP_EOL);
     exit(1);
 }
-/** @var \Composer\Autoload\ClassLoader $composer */
-$composer = require __DIR__ . '/vendor/autoload.php';
+foreach ([
+             __DIR__ . '/vendor/autoload.php',
+             __DIR__ . '../../vendor/autoload.php'
+         ] as $autoloadPath) {
+    if (!file_exists($autoloadPath)) {
+        continue;
+    }
+    /** @var \Composer\Autoload\ClassLoader $composer */
+    $composer = require $autoloadPath;
+}
+
+if (empty($composer)) {
+    fwrite(STDERR, "Please run composer install to ensure there is a ClassLoader inside 'vendor/autoload.php'" . PHP_EOL);
+    exit(1);
+}
 
 use RobertBakker\PhpCodeGenerator\CodeWriter;
 use RobertBakker\PhpCodeGenerator\Command\ServiceCommand;
