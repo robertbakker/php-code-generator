@@ -6,7 +6,11 @@ This is very early work, do not use.
 
 ## Instruction
 
-Make a `.env.local` file containing the value:
+```
+composer require --dev robertbakker/php-code-generator
+```
+
+Make a `.env.local` file in the root of the project containing the value:
 
 ```
 CODE_GENERATOR_NAMESPACE=Your\Name\Space
@@ -16,7 +20,7 @@ CODE_GENERATOR_NAMESPACE=Your\Name\Space
 
 ```
 Usage:
-  ./vendor/pcg [options] [arguments]
+  ./vendor/bin/pcg [options] [arguments]
 
 Options:
   -h, --help            Display help for the given command. When no command is given display help for the list command
