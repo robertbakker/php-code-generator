@@ -16,7 +16,7 @@ CODE_GENERATOR_NAMESPACE=Your\Name\Space
 
 ```
 Usage:
-  ./code-generator [options] [arguments]
+  ./vendor/pcg [options] [arguments]
 
 Options:
   -h, --help            Display help for the given command. When no command is given display help for the list command

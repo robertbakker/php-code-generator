@@ -1,7 +1,7 @@
 <?php
 
 
-namespace RobertBakker\CodeGenerator;
+namespace RobertBakker\PhpCodeGenerator;
 
 
 use Composer\Autoload\ClassLoader;

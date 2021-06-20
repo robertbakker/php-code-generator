@@ -1,14 +1,14 @@
 <?php
 
 
-namespace RobertBakker\CodeGenerator;
+namespace RobertBakker\PhpCodeGenerator\Command;
 
 
-use Composer\Autoload\ClassLoader;
+use RobertBakker\PhpCodeGenerator\CodeWriter;
+use RobertBakker\PhpCodeGenerator\Generator\ServiceGenerator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -30,12 +30,15 @@ class ServiceCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $generator = new Generator\ServiceGenerator();
+        $generator = new ServiceGenerator();
         $namespace = $this->defaultNamespace;
 
         $question = new Question(sprintf("What must be the name of the service class? (e.g. UserService will result in '%s')",
             trim($namespace, "\\") . "\\UserService"));
-        $className = $io->askQuestion($question);
+        do {
+            $className = $io->askQuestion($question);
+        } while (empty($className));
+
         $className = preg_replace('/Service$/', '', $className);
         $className .= "Service";
         $className = ucfirst($className);
@@ -46,10 +49,6 @@ class ServiceCommand extends Command
         $generated = $generator->generate($namespaceService, $className);
         $this->codeWriter->writeNamespace($generated);
 
-//        if (!$io->askQuestion($question)) {
-//
-//            return Command::SUCCESS;
-//        }
         return Command::SUCCESS;
     }
 }

@@ -8,8 +8,8 @@ if (version_compare('8.0.0', PHP_VERSION, '>')) {
 /** @var \Composer\Autoload\ClassLoader $composer */
 $composer = require __DIR__ . '/vendor/autoload.php';
 
-use RobertBakker\CodeGenerator\CodeWriter;
-use RobertBakker\CodeGenerator\ServiceCommand;
+use RobertBakker\PhpCodeGenerator\CodeWriter;
+use RobertBakker\PhpCodeGenerator\Command\ServiceCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Dotenv\Dotenv;
 

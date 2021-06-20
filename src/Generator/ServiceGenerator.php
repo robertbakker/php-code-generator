@@ -1,13 +1,10 @@
 <?php
 
 
-namespace RobertBakker\CodeGenerator\Generator;
+namespace RobertBakker\PhpCodeGenerator\Generator;
 
 
-use Nette\PhpGenerator\ClassType;
-use Nette\PhpGenerator\Parameter;
 use Nette\PhpGenerator\PhpNamespace;
-use Nette\PhpGenerator\Printer;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;

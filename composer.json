@@ -1,13 +1,17 @@
 {
-    "name": "robertbakker/code-generator",
-    "type": "project",
+    "name": "robertbakker/php-code-generator",
+    "type": "library",
     "authors": [
         {
             "name": "Robert Bakker",
             "email": "r.m.bakker@live.nl"
         }
     ],
+    "bin": [
+        "pcg"
+    ],
     "require": {
+        "php": ">=8.0",
         "symfony/console": "^5.3",
         "nette/php-generator": "^3.5",
         "symfony/var-dumper": "^5.3",
@@ -16,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RobertBakker\\CodeGenerator\\" : "src/"
+            "RobertBakker\\PhpCodeGenerator\\" : "src/"
         }
     }
 }
