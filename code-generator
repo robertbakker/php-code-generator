@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+if (version_compare('8.0.0', PHP_VERSION, '>')) {
+    echo "Code Generator requires PHP 8 or higher";
+    exit(1);
+}
+/** @var \Composer\Autoload\ClassLoader $composer */
+$composer = require __DIR__ . '/vendor/autoload.php';
+
+use RobertBakker\CodeGenerator\CodeWriter;
+use RobertBakker\CodeGenerator\ServiceCommand;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Dotenv\Dotenv;
+
+(new Dotenv())->bootEnv(__DIR__ . '/.env');
+$defaultNamespace = $_ENV["CODE_GENERATOR_NAMESPACE"];
+
+$application = new Application();
+$application->setName("PHP Code Generator");
+
+$codeWriter = new CodeWriter($composer);
+$application->add(new ServiceCommand($codeWriter, $defaultNamespace));
+
+$application->run();
+
